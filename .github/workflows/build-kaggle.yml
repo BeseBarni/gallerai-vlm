@@ -53,6 +53,6 @@ jobs:
         env:
             KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
             KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
-        run: 
+        run: |
             export PATH=$PATH:~/.local/bin
             kaggle kernels push -p .
