@@ -42,7 +42,7 @@ jobs:
             kernel-metadata.json
 
   deploy-to-kaggle:
-    if: github.event_name == 'pull_request'
+    if: github.event_name == 'workflow_dispatch'
     needs: build-notebook
     runs-on: ubuntu-latest
     steps:
