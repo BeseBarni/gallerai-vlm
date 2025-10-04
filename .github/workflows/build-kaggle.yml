@@ -1,9 +1,9 @@
 name: Generate Kaggle Notebook
 
-on: [pull_request]
+on: [pull_request,workflow_dispatch]
 
 jobs:
-  build-and-push:
+  build-notebook:
     runs-on: ubuntu-latest
 
     steps:
@@ -38,3 +38,19 @@ jobs:
         with:
           name: kaggle-notebook # A name for your artifact
           path: gai-vlm.ipynb    # The path to the notebook file to save
+
+  deploy-to-kaggle:
+    if: github.event_name == 'workflow_dispatch'
+    needs: build-notebook
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download notebook artifact
+        uses: actions/download-artifact@v4
+        with:
+            name: kaggle-notebook
+
+      - name: Deploy to Kaggle
+        env:
+            KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
+            KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+        run: kaggle kernels push -p .
