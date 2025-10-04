@@ -37,7 +37,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: kaggle-notebook # A name for your artifact
-          path: gai-vlm.ipynb    # The path to the notebook file to save
+          path: |
+            gai-vlm.ipynb
+            kernel-metadata.json
 
   deploy-to-kaggle:
     if: github.event_name == 'pull_request'
