@@ -24,12 +24,13 @@ jobs:
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install -r pipreqs               
 
       # Step 4: Generate the notebook and requirements
       - name: Generate artifacts
         run: |
           pipreqs ./src --force
+          pip install -r requirements.txt
           python generate_notebook.py
 
       # Step 5: Push to Kaggle
