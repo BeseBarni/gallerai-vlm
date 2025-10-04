@@ -20,20 +20,23 @@ jobs:
         with:
           python-version: '3.13.5'
 
-      # Step 3: Install dependencies
-      - name: Install Python dependencies
+      # Step 3: Install workflow tools
+      - name: Install workflow tools
         run: |
           python -m pip install --upgrade pip
-          pip install -r pipreqs               
+          pip install pipreqs jupytext nbformat kaggle            
 
-      # Step 4: Generate the notebook and requirements
-      - name: Generate artifacts
+      # Step 4: Generate requirements and install dependencies
+      - name: Generate and install project dependencies
         run: |
           pipreqs ./src --force
           pip install -r requirements.txt
-          python generate_notebook.py
 
-      # Step 5: Push to Kaggle
+      # Step 5: Generate the notebook
+      - name: Generate notebook
+        run: python generate_notebook.py
+
+      # Step 6: Push to Kaggle
       - name: Push to Kaggle
         env:
           KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
