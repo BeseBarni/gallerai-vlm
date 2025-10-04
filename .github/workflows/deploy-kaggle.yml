@@ -14,7 +14,7 @@ jobs:
           name: kaggle-notebook # Must match the artifact name from the build workflow
 
       - name: Set up Python and Install Kaggle CLI
-        uses: actions/setup-python@v5
+        uses: actions/download-artifact@v4
         with:
           python-version: '3.x'
       - run: pip install kaggle
