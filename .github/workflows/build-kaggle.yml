@@ -21,7 +21,7 @@ jobs:
       - name: Install workflow tools
         run: |
           python -m pip install --upgrade pip
-          pip install kaggle pipreqs jupytext nbformat kaggle            
+          pip install pipreqs jupytext nbformat kaggle            
 
       # Step 4: Generate requirements and install dependencies
       - name: Generate and install project dependencies
@@ -49,10 +49,12 @@ jobs:
         with:
             name: kaggle-notebook
 
+      - name: Install Kaggle package
+        run: pip install kaggle
+
       - name: Deploy to Kaggle
         env:
             KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
             KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
-        run: |
-            export PATH=$PATH:~/.local/bin
+        run: 
             kaggle kernels push -p .
