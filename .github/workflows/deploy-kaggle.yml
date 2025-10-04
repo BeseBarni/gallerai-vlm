@@ -1,9 +1,8 @@
 name: Generate and Push Kaggle Notebook
 
 on:
-  pull_request:
-    branches:
-      - main
+  push:
+    branches: [main]
 
 jobs:
   build-and-push:
