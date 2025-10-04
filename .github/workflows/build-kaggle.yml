@@ -21,7 +21,7 @@ jobs:
       - name: Install workflow tools
         run: |
           python -m pip install --upgrade pip
-          pip install pipreqs jupytext nbformat kaggle            
+          pip install kaggle pipreqs jupytext nbformat kaggle            
 
       # Step 4: Generate requirements and install dependencies
       - name: Generate and install project dependencies
@@ -40,7 +40,7 @@ jobs:
           path: gai-vlm.ipynb    # The path to the notebook file to save
 
   deploy-to-kaggle:
-    if: github.event_name == 'workflow_dispatch'
+    if: github.event_name == 'pull_request'
     needs: build-notebook
     runs-on: ubuntu-latest
     steps:
