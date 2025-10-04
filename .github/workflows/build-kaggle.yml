@@ -37,7 +37,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: kaggle-notebook # A name for your artifact
-          path: gai-vlm.ipynb    # The path to the notebook file to save
+          path: |
+            gai-vlm.ipynb
+            kernel-metadata.json
 
   deploy-to-kaggle:
     if: github.event_name == 'workflow_dispatch'
@@ -49,8 +51,12 @@ jobs:
         with:
             name: kaggle-notebook
 
+      - name: Install Kaggle package
+        run: pip install kaggle
+
       - name: Deploy to Kaggle
         env:
             KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
             KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
-        run: kaggle kernels push -p .
+        run: 
+            kaggle kernels push -p .
