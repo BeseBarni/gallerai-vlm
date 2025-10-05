@@ -2,9 +2,10 @@ import jupytext
 import nbformat
 import glob
 
-SCRIPT_FILES = sorted(glob.glob('src/*.py'))
+SCRIPT_FILES = sorted(glob.glob('src/**/*.py'), key=lambda x: int(x.split('.')[0].split('_')[-1]))
 OUTPUT_NOTEBOOK = 'gai-vlm.ipynb'
 
+print(len(SCRIPT_FILES))
 
 if not SCRIPT_FILES:
     raise ValueError("No Python files found in the 'src' directory.")
