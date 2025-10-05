@@ -1,5 +1,8 @@
 {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "ms-python.python",
-    "editor.aiStats.enabled": true
+    "editor.aiStats.enabled": true,
+    "python.analysis.extraPaths": [
+        "./src/consts",
+        "./src/utils"
+    ]
 }
